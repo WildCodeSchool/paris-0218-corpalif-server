@@ -1,1 +1,1 @@
-echo '{ "private": true }' > package.json
+{ "private": true }

@@ -1,9 +1,9 @@
 {
   "private": true,
   "dependencies": {
+    "snazzy": "^7.1.1",
     "standard": "^11.0.1"
   },
-
   "scripts": {
     "lint:js": "standard"
   }

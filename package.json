@@ -2,7 +2,9 @@
   "private": true,
   "dependencies": {
     "snazzy": "^7.1.1",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "stylelint": "^9.2.1",
+    "stylelint-config-recommended": "^2.1.0"
   },
   "scripts": {
     "lint:js": "standard"

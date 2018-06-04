@@ -1,1 +1,10 @@
-{ "private": true }
+{
+  "private": true,
+  "dependencies": {
+    "standard": "^11.0.1"
+  },
+
+  "scripts": {
+    "lint:js": "standard"
+  }
+}

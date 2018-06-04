@@ -8,6 +8,8 @@
     "stylelint-config-recommended": "^2.1.0"
   },
   "scripts": {
+    "test_travis": "echo 'no tests'",
+    "_commentaire_sur_test_travis": "script qui s'appelait 'test' à la base et qui touche .travis.yml pour le lancer",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
     "lint:js": "standard | snazzy",
     "lint:css": "stylelint 'client/style/**/*.css'",

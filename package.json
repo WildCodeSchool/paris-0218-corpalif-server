@@ -2,12 +2,14 @@
   "private": true,
   "dependencies": {
     "htmllint-cli": "0.0.7",
+    "nodemon": "^1.17.5",
     "snazzy": "^7.1.1",
     "standard": "^11.0.1",
     "stylelint": "^9.2.1",
     "stylelint-config-recommended": "^2.1.0"
   },
   "scripts": {
+    "server": "nodemon server --ignore client",
     "test_travis": "echo 'no tests'",
     "_commentaire_sur_test_travis": "script qui s'appelait 'test' à la base et qui touche .travis.yml pour le lancer",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:html",

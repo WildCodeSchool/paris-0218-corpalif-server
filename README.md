@@ -6,8 +6,8 @@ Corpalif's Project
 
 ## TRAVIS
 
-[![Travis master](https://img.shields.io/travis/WildCodeSchool/REPO.svg)](https://travis-ci.org/WildCodeSchool/REPO)
-[![Travis dev](https://img.shields.io/travis/WildCodeSchool/REPO/dev.svg)](https://travis-ci.org/WildCodeSchool/REPO/branches)
+[![Travis master](https://img.shields.io/travis/WildCodeSchool/paris-0218-corpalif-server.svg)](https://travis-ci.org/WildCodeSchool/paris-0218-corpalif-server)
+[![Travis dev](https://img.shields.io/travis/WildCodeSchool/paris-0218-corpalif-server/dev.svg)](https://travis-ci.org/WildCodeSchool/paris-0218-corpalif-server/branches)
 
 ## STANDARD JS
 

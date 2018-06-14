@@ -1,3 +1,4 @@
+const Joi = require('joi')
 const express = require('express')
 const app = express()
 
@@ -15,8 +16,16 @@ app.get('/users/:id', (req, res) => {
     res.send('Users by Id ' + req.params.id)
 })
 
-app.post('users', (req, res) => {
+app.put('/users/:id', (req, res) => {
+    res.send('Modify Users ' + req.params.id)
+})
+
+app.post('/users', (req, res) => {
     
+})
+
+app.delete('/users/:id', (req, res) => {
+    res.send('Delete Users ' + req.params.id)
 })
 
 const port = process.env.PORT || 3000

@@ -45,3 +45,6 @@ CREATE TABLE posts (
 	PRIMARY KEY (id),
 	FOREIGN KEY (categories) REFERENCES categories(id)
 ) ENGINE=INNODB;
+
+-- INSERT INTO users (firstName, lastName, email, password)
+-- 	VALUES("ok", "ok", "ok", "ok");

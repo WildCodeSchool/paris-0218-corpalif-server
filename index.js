@@ -1,31 +1,13 @@
 const Joi = require('joi')
+const users = require('./routes/users');
 const express = require('express')
 const app = express()
 
 app.use(express.json())
+app.use('/users', users);
 
 app.get('/', (req, res) => {
-    res.send('Hello')
-})
-
-app.get('/users', (req, res) => {
-    res.send('Users')
-})
-
-app.get('/users/:id', (req, res) => {
-    res.send('Users by Id ' + req.params.id)
-})
-
-app.put('/users/:id', (req, res) => {
-    res.send('Modify Users ' + req.params.id)
-})
-
-app.post('/users', (req, res) => {
-    
-})
-
-app.delete('/users/:id', (req, res) => {
-    res.send('Delete Users ' + req.params.id)
+    res.send('OK')
 })
 
 const port = process.env.PORT || 3000

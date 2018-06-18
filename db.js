@@ -1,4 +1,6 @@
 const mysql = require('mysql2/promise')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // connection database with a promise
 const pendingConnection = mysql.createConnection({
@@ -19,9 +21,32 @@ const exec = async (query) => {
   return result[0]
 }
 
-//read = () => exec(`SELECT * FROM users`)
+const readUsers = () => exec(`SELECT * FROM users`)
+const readUser = params => exec(`SELECT * FROM users WHERE id = ? `, [params.id])
+const createUser = params => bcrypt.hash(params.password, saltRounds)
+.then(function(hash) {
+  exec(`
+  INSERT INTO users (firstName, lastName, email, password)
+  VALUES (?, ?, ?, ?)`, [ params.firstName, params.lastName, params.email, hash ])
+})
+const updateUser = params => bcrypt.hash(params.password, saltRounds)
+.then(function(hash) {
+  exec(`
+  UPDATE users SET firstName=?, lastName=?, email=?, password=? WHERE id=?`, [ params.firstName, params.lastName, params.email, hash, params.id ])
+})
+const deleteUser = params => exec(`DELETE FROM users WHERE id=?`, [ params.id ])
+
 
 // read()
 //    .then(result => console.log(result))
 //    .catch()
+
+module.exports = {
+  readUsers,
+  readUser,
+  createUser,
+  updateUser,
+  deleteUser
+}
+
 

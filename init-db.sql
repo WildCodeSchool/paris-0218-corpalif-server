@@ -11,17 +11,6 @@ CREATE TABLE users (
 	lastName VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	password VARCHAR(250) NOT NULL,
-	adress VARCHAR(256),
-	postCode INT(50),
-	city VARCHAR(50),
-	phone INT(10),
-	structure VARCHAR(250),
-	service VARCHAR(250),
-	fonction VARCHAR(250),
-	isAdmin TINYINT DEFAULT 0,
-	isDoc TINYINT DEFAULT 0,
-	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	deletedAt TIMESTAMP NULL,
 	PRIMARY KEY (id),
 	UNIQUE KEY (email)
 ) ENGINE=INNODB;
@@ -48,3 +37,17 @@ CREATE TABLE posts (
 
 -- INSERT INTO users (firstName, lastName, email, password)
 -- 	VALUES("ok", "ok", "ok", "ok");
+
+
+--ADD TO TABLE USERS WHEN ROUTES READY
+-- adress VARCHAR(256),
+-- postCode INT(50),
+-- city VARCHAR(50),
+-- phone INT(10),
+-- structure VARCHAR(250),
+-- service VARCHAR(250),
+-- fonction VARCHAR(250),
+-- isAdmin TINYINT DEFAULT 0,
+-- isDoc TINYINT DEFAULT 0,
+-- createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+-- deletedAt TIMESTAMP NULL,

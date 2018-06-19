@@ -1,24 +1,32 @@
+const db = require('../db.js')
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('Users')
+router.get('/', async (req, res, next) => {
+    const users = await db.readUsers()
+    res.send(users)
 })
 
-router.get('/:id', (req, res) => {
-    res.send('Users by Id ' + req.params.id)
+router.get('/:id', async (req, res, next) => {
+    const user = await db.readUser(req.params.id)
+    if (!user) return res.status(404).send('No user with this id')
+    res.send(user)
 })
 
-router.put('/:id', (req, res) => {
-    res.send('Modify Users ' + req.params.id)
+router.put('/:id', async (req, res, next) => {
+    const putUser = await db.updateUser(req.body, req.params.id)
+    res.send(putUser)
 })
 
-router.post('/', (req, res) => {
-    
+router.post('/', async (req, res, next) => {
+    const postUser = await db.createUser(req.body)
+    res.send(postUser)
 })
 
-router.delete('/:id', (req, res) => {
-    res.send('Delete Users ' + req.params.id)
+router.delete('/:id', async (req, res, next) => {
+    const deleteUser = await db.deleteUser(req.params.id)
+    //if (!deleteUser) return res.status(404).send('No user with this id')
+    res.send(deleteUser)
 })
 
 module.exports = router

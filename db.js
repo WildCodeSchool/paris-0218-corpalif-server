@@ -13,31 +13,42 @@ const pendingConnection = mysql.createConnection({
 
 
 // function to execute query
-const exec = async (query) => {
+const exec = async (query, params) => {
   const connection = await pendingConnection
   console.log('QUERY' + query)
   console.log('executing', query)
-  const result = await connection.execute(query)
+
+  const result = await connection.execute(query, params)
   return result[0]
 }
 
 const readUsers = () => exec(`SELECT * FROM users`)
-const readUser = params => exec(`SELECT * FROM users WHERE id = ? `, [params.id])
+
+const readUser = params => {
+  console.log('PARAMS ' + params)
+  return exec(`SELECT * FROM users WHERE id=?`, [ params ])
+}
+
 const createUser = params => bcrypt.hash(params.password, saltRounds)
-.then(function(hash) {
-  exec(`
-  INSERT INTO users (firstName, lastName, email, password)
-  VALUES (?, ?, ?, ?)`, [ params.firstName, params.lastName, params.email, hash ])
-})
-const updateUser = params => bcrypt.hash(params.password, saltRounds)
-.then(function(hash) {
-  exec(`
-  UPDATE users SET firstName=?, lastName=?, email=?, password=? WHERE id=?`, [ params.firstName, params.lastName, params.email, hash, params.id ])
-})
-const deleteUser = params => exec(`DELETE FROM users WHERE id=?`, [ params.id ])
+  .then(hash => {
+    exec(`
+    INSERT INTO users (firstName, lastName, email, password)
+    VALUES (?, ?, ?, ?)`, [ params.firstName, params.lastName, params.email, hash ])
+  })
+
+const updateUser = (params, id) => bcrypt.hash(params.password, saltRounds)
+  .then(hash => {
+    console.log(params)
+    exec(`
+    UPDATE users SET firstName=?, lastName=?, email=?, password=? WHERE id=?`, [ params.firstName, params.lastName, params.email, hash, id ])
+  })
+
+const deleteUser = params => {
+  return exec(`DELETE FROM users WHERE id=?`, [ params ])
+}
 
 
-// read()
+// readUser(1)
 //    .then(result => console.log(result))
 //    .catch()
 

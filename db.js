@@ -29,6 +29,11 @@ const readUser = params => {
   return exec(`SELECT * FROM users WHERE id=?`, [ params ])
 }
 
+const readUserEmail = params => {
+  console.log('PARAMS ' + params)
+  return exec(`SELECT * FROM users WHERE email=?`, [ params ])
+}
+
 const createUser = params => bcrypt.hash(params.password, saltRounds)
   .then(hash => {
     exec(`
@@ -55,6 +60,7 @@ const deleteUser = params => {
 module.exports = {
   readUsers,
   readUser,
+  readUserEmail,
   createUser,
   updateUser,
   deleteUser

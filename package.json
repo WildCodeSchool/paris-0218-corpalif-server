@@ -12,10 +12,12 @@
   "dependencies": {
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
+    "config": "^1.30.0",
     "express": "^4.16.3",
     "htmllint-cli": "0.0.7",
     "http-server": "^0.11.1",
     "joi": "^13.4.0",
+    "jsonwebtoken": "^8.3.0",
     "mysql2": "^1.5.3",
     "nodemon": "^1.17.5",
     "snazzy": "^7.1.1",

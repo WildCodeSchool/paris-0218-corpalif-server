@@ -34,19 +34,35 @@ const readUserEmail = params => {
   return exec(`SELECT * FROM users WHERE email=?`, [ params ])
 }
 
-const createUser = params => bcrypt.hash(params.password, saltRounds)
+const createUser = params => {
+  const randomPass = Math.random().toString(36).slice(-8)
+  const status = false
+  bcrypt.hash(randomPass, saltRounds)
   .then(hash => {
     exec(`
-    INSERT INTO users (firstName, lastName, email, password)
-    VALUES (?, ?, ?, ?)`, [ params.firstName, params.lastName, params.email, hash ])
+    INSERT INTO users (firstName, lastName, email, password, status)
+    VALUES (?, ?, ?, ?, ?)`, [ params.firstName, params.lastName, params.email, hash, status ])
   })
+}
 
-const updateUser = (params, id) => bcrypt.hash(params.password, saltRounds)
+const updateUser = (params, id) => {
+  const status = true
+  bcrypt.hash(params.password, saltRounds)
   .then(hash => {
     console.log(params)
     exec(`
-    UPDATE users SET firstName=?, lastName=?, email=?, password=? WHERE id=?`, [ params.firstName, params.lastName, params.email, hash, id ])
+    UPDATE users SET firstName=?, lastName=?, email=?, password=?, status=? WHERE id=?`, [ params.firstName, params.lastName, params.email, hash, status, id ])
   })
+}
+
+const updatePassword = (params) => {
+  bcrypt.hash(params.password, saltRounds)
+  .then(hash => {
+    console.log(params)
+    exec(`
+    UPDATE users SET password=? WHERE email=?`, [ hash, params.email ])
+  })
+}
 
 const deleteUser = params => {
   return exec(`DELETE FROM users WHERE id=?`, [ params ])
@@ -63,7 +79,7 @@ module.exports = {
   readUserEmail,
   createUser,
   updateUser,
+  updatePassword,
   deleteUser
 }
-
 

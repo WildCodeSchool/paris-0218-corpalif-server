@@ -1,6 +1,7 @@
 const mysql = require('mysql2/promise')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken')
 
 // connection database with a promise
 const pendingConnection = mysql.createConnection({
@@ -34,7 +35,12 @@ const readUserEmail = params => {
   return exec(`SELECT * FROM users WHERE email=?`, [ params ])
 }
 
-const createUser = params => {
+const readUserToken = params => {
+  console.log('PARAMS ' + params)
+  return exec(`SELECT * FROM users WHERE token=?`, [ params ])
+}
+
+const createUser = (params, token) => {
   const randomPass = Math.random().toString(36).slice(-8)
   const status = false
   bcrypt.hash(randomPass, saltRounds)
@@ -55,12 +61,16 @@ const updateUser = (params, id) => {
   })
 }
 
+const updateUserToken = ( token, params) => {
+  return exec(`UPDATE users SET token=? WHERE email=?`, [ token, params ])
+}
+
 const updatePassword = (params) => {
   bcrypt.hash(params.password, saltRounds)
   .then(hash => {
     console.log(params)
     exec(`
-    UPDATE users SET password=? WHERE email=?`, [ hash, params.email ])
+    UPDATE users SET password=?, token='0' WHERE email=?`, [ hash, params.email ])
   })
 }
 
@@ -77,9 +87,11 @@ module.exports = {
   readUsers,
   readUser,
   readUserEmail,
+  readUserToken,
   createUser,
   updateUser,
   updatePassword,
+  updateUserToken,
   deleteUser
 }
 

@@ -12,6 +12,7 @@ CREATE TABLE users (
 	email VARCHAR(50) NOT NULL,
 	password VARCHAR(250) NOT NULL,
 	status TINYINT NOT NULL,
+	token VARCHAR(250),
 	PRIMARY KEY (id),
 	UNIQUE KEY (email)
 ) ENGINE=INNODB;
